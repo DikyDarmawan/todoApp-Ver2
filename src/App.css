@@ -1,38 +1,41 @@
-.App {
-  text-align: center;
+body{
+  background-color: white;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App{
+  background-color: #9266ff;
+  border-radius: 10px;
+  min-height: 500px;
+  width: 400px;
+  margin: 40px auto;
+  -webkit-box-shadow: 5px 6px 11px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 6px 11px -1px rgba(0,0,0,0.75);
+  box-shadow: 5px 6px 11px -1px rgba(0,0,0,0.75);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#tambah-agenda input{
+  background-color: white;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  padding: 0 20px;
+  margin: 20px;
+  font-size: 18px;
+  border-radius: 10px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#tambah-agenda input:focus, #tambah-agenda button{
+outline:none;
 }
-
-.App-link {
-  color: #61dafb;
+#tambah-agenda button{
+  height: 50px;
+  width: 80px;
+  border-radius: 5px;
+  border: 0px;
+  background-color: teal;
+  cursor: pointer;
+  font-weight: bolder;
+  color: #fff;
+  font-style: oblique;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.faicons{
+  margin: 0 5px;
+  font-size: 15px;
 }
