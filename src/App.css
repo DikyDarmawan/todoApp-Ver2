@@ -1,7 +1,7 @@
 body{
   background-color: white;
 }
-.App{
+#App{
   background-color: #9266ff;
   border-radius: 10px;
   min-height: 500px;
@@ -38,4 +38,50 @@ outline:none;
 .faicons{
   margin: 0 5px;
   font-size: 15px;
+}
+#bike{
+  margin: 40px 10px;
+}
+#bike p{
+  color: #fff;
+  padding-left:130px;
+}
+#right-wheel,
+#left-wheel{
+    animation: wheel 4s infinite linear;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+#man-bike{
+animation: bike 1s ease-in-out infinite alternate;
+transform-origin: bottom;
+}
+#hat{
+    animation: hat 1s ease-in-out infinite alternate;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+@keyframes wheel{
+    from{
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+    }
+}
+@keyframes bike{
+    from{
+        transform: rotateX(0deg);
+    }
+    to{
+        transform: rotateX(20deg);
+    }
+}
+@keyframes hat{
+    from{
+        transform: translateY(0%);
+    }
+    to{
+        transform: translateY(40%);
+    }
 }
