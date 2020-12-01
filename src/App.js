@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
 import ListItems from './ListItems';
-import bike from './bike.svg';
 import './bike.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { connect } from 'react-redux';
+import actionTypes from './redux/actionTypes';
 
 library.add(faTrash);
 library.add(faPlusCircle);
@@ -23,6 +24,14 @@ class App extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+  }
+
+  componentDidMount() {
+    this.getStorage();
+  }
+
+  componentDidUpdate() {
+    this.setStorage();
   }
   handleInput(e) {
     this.setState({
@@ -45,6 +54,7 @@ class App extends React.Component {
         }
       })
     }
+    // this.props.addItem();
   }
   deleteItem(key) {
     const filterdItems = this.state.items.filter(item =>
@@ -54,7 +64,25 @@ class App extends React.Component {
     })
   }
 
+  // completeTodo = (id) => {
+  //   const newTodos = [...this.state.items];
+  //   const editedTodo = newTodos.find((todo) => todo.id === id);
+  //   editedTodo.completed = !editedTodo.completed;
+  //   this.setState({
+  //     todos: newTodos,
+  //   });
+  // };
+
+  getStorage = () => {
+   JSON.parse(localStorage.getItem("todos"));
+  };
+
+  setStorage = () => {
+    localStorage.setItem("todos", JSON.stringify(this.state.items));
+  };
+
   render() {
+    console.log(this.props);
     return (
       < div id="App" >
         <header>
@@ -68,7 +96,7 @@ class App extends React.Component {
 
         <div id="bike" style={{ display: this.state.items.length ? "none" : "block" }}>
           <svg width="400" height="250" viewBox="0 0 1058 785" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="undraw_Ride_a_bicycle_2yok 1" clip-path="url(#clip0)">
+            <g id="undraw_Ride_a_bicycle_2yok 1" clipPath="url(#clip0)">
               <path id="Vector" d="M193.408 132.666C188.268 139.582 186.63 149.026 184.714 157.923C169.292 229.628 125.39 288.885 74.1789 332.209C52.4923 350.56 26.1969 375.03 32.6815 405.653C36.171 422.099 48.4394 433.718 57.7768 446.786C77.3643 474.148 85.1875 512.283 78.2287 546.566C70.3158 585.572 44.5957 622.889 55.0711 661.402C61.5286 685.108 80.2231 701.27 98.108 715.07C126.009 736.584 154.69 756.611 184.151 775.149C203.899 787.574 224.847 799.578 247.165 800.159C266.815 800.674 285.617 792.27 303.835 783.995C319.752 776.758 336.065 769.24 348.533 755.717C356.67 746.888 362.947 735.709 372.11 728.36C393.631 711.098 422.828 719.885 448.783 725.509C510.022 738.694 574.393 729.522 630.533 699.618C716.65 653.74 779.503 563.322 863.428 512.288C899.512 490.339 939.235 475.848 972.282 448.255C990.893 432.555 1006.62 413.725 1018.75 392.614C1042.7 351.25 1054.18 299.469 1047.61 249.676C1041.05 199.883 1015.91 152.845 978.803 126.413C939.084 98.1201 890.551 94.901 846.175 78.9473C800.35 62.4657 758.803 32.2722 713.339 14.4007C676.553 -0.0152259 637.006 -6.01245 597.6 -3.15101C558.194 -0.289561 519.929 11.358 485.612 30.937C438.462 57.8364 392.292 117.388 338.627 124.429C300.386 129.354 221.563 94.7852 193.408 132.666Z" fill="url(#paint0_linear)" />
               <g id="left-wheel">
                 <path id="Vector_2" d="M255.23 716.99L248.96 619.05L248.83 618.84L242.51 621.04L213.43 705.89L167.18 673.1L240.85 619.69L240.92 619.48L241.34 619.33L246.09 615.88L168.85 572.57L149.93 593.37L152.93 612.87L241.75 614.49V616.49L151.27 614.87L147.85 592.73L173.75 564.27L212.5 519.07L213.19 520.94L221.39 511.94L251.85 517.4V516.19L253.85 516.25V517.76L299.21 525.88L256.92 610.49L250.75 614.96V615.46V616.02L348.55 581.94L336.94 673.15L253.94 620.28L251.02 618.64L299.96 697.52L255.23 716.99ZM251.23 622.65L257.08 714.03L297.13 696.65L251.23 622.65ZM170.65 673.08L212.44 702.71L239.78 622.97L170.65 673.08ZM252.97 617.42L255.06 618.59L335.41 669.79L346.21 584.92L252.97 617.42ZM245.87 610.22L248.38 614.27L248.82 613.95L251.82 519.42L222.08 514.1L213.92 523.1L245.87 610.22ZM170.45 571.16L245.29 613.16L243.99 611.03L212.41 524.76L175.22 565.63L170.45 571.16ZM253.85 519.77L250.85 612.49L255.37 609.21L296.28 527.39L253.85 519.77Z" fill="#535461" />
@@ -136,24 +164,42 @@ class App extends React.Component {
               </g>
             </g>
             <defs>
+
               <linearGradient id="paint0_linear" x1="874" y1="65" x2="80" y2="725" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#63A1FF" />
-                <stop offset="0.9998" stop-color="#63DAFF" />
-                <stop offset="0.9999" stop-color="#65CDFF" stop-opacity="0.276042" />
+                <stop stopColor="#63A1FF" />
+                <stop offset="0.9998" stopColor="#63DAFF" />
+                <stop offset="0.9999" stopColor="#65CDFF" stopOpacity="0.276042" />
               </linearGradient>
+
               <clipPath id="clip0">
                 <rect width="1057.7" height="784.98" fill="white" />
               </clipPath>
+              
             </defs>
           </svg>
           <p>wohoo no task!</p>
         </div>
 
-        <ListItems items={this.state.items}
-          deleteItem={this.deleteItem}></ListItems>
+        <ListItems 
+          items={this.state.items}
+          deleteItem={this.deleteItem}>
+          </ListItems>
       </ div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    currentItem: state.currentItem,
+    items: state.items
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItem : () => dispatch({type : actionTypes.ADD})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

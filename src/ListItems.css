@@ -18,7 +18,9 @@ box-shadow: 1px 1px 6px -1px rgba(0,0,0,0.75);
     right: 10px;
     cursor: pointer;
 }
-
+.completed {
+    text-decoration: line-through;
+  }
 .faicons{
     margin: 0 5px;
     font-size: 15px;
