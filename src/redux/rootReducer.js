@@ -1,31 +1,22 @@
-import actionTypes from './actionTypes';
-
 const globalState = {
-    items: [],
-    currentItem: {
-        text: '',
-        key: ''
-      }
+    todos: []
 }
 
 const rootReducer = (state = globalState, action) => {
     switch (action.type) {
-        case actionTypes.ADD:
-            const newItem = state.currentItem;
-            if (newItem.text !== "") {
-              const newItems = [...state.items, newItem];
-              this.setState({
-                items: newItems,
-                currentItem: {
-                  text: '',
-                  key: ''
-                }
-              })
-            }
+        case 'ADD_TODO':
+          console.log("Redux Store",state.todos);
             return {
               ...state,
-              currentItem : state.currentItem
-            }
+              todos : [...state.todos, action.payload],
+              
+            };
+        
+        case 'DELETE_TODO':
+          return {
+            ...state,
+            todos: state.todos.filter(todo => todo.id !== action.payload)
+          };
         
         default:
             return state

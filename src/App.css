@@ -11,6 +11,10 @@ body{
   -moz-box-shadow: 5px 6px 11px -1px rgba(0,0,0,0.75);
   box-shadow: 5px 6px 11px -1px rgba(0,0,0,0.75);
 }
+#tambah-agenda{
+  align-items: center;
+  justify-content: center;
+}
 #tambah-agenda input{
   background-color: white;
   border: 0;
